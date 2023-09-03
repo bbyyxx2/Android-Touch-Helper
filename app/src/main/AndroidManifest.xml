@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.zfdang.touchhelper">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <queries>
         <intent>
@@ -46,18 +49,22 @@
                 android:resource="@xml/accessibility_service_config" />
         </service>
 
-        <receiver
-            android:name=".TouchHelperServiceReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter android:priority="90000">
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-<!--                <action android:name="android.intent.action.SCREEN_ON" />-->
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
+<!--        <receiver-->
+<!--            android:name=".TouchHelperServiceReceiver"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter android:priority="90000">-->
+<!--                <action android:name="android.intent.action.PACKAGE_ADDED" />-->
+<!--                <action android:name="android.intent.action.PACKAGE_REMOVED" />-->
+<!--                <action android:name="android.intent.action.USER_PRESENT" />-->
+<!--&lt;!&ndash;                <action android:name="android.intent.action.SCREEN_ON" />&ndash;&gt;-->
+<!--                <data android:scheme="package" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
+
+        <service android:name="com.zfdang.notificationhelper.ForeGroundService"
+            android:foregroundServiceType="dataSync"
+            android:enabled="true"/>
     </application>
 
 

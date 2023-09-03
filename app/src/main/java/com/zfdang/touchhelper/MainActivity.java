@@ -1,8 +1,11 @@
 package com.zfdang.touchhelper;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.zfdang.notificationhelper.ForeGroundService;
+import com.zfdang.notificationhelper.NotificationHelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        startForegroundService(new Intent(getApplicationContext(), ForeGroundService.class));
     }
 
 }
